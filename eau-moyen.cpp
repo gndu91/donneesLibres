@@ -4,20 +4,10 @@
 using namespace std;
 
 int main() {
-    vector<vector<int>> brut;
-    vector<vector<int>> mois;
-    vector<string>      noms = {"Janvier",
-                                "Fevrier",
-                                "Mars",
-                                "Avril",
-                                "Mai",
-                                "Juin",
-                                "Juillet",
-                                "Aout",
-                                "Septembre",
-                                "Octobre",
-                                "Novembre",
-                                "Decembre"};
+    vector<vector<int> > brut;
+    vector<vector<int> > mois;
+    vector<string>          noms = {"Janvier  ", "Fevrier  ", "Mars     ", "Avril    ", "Mai      ", "Juin     ", "Juillet  ", "Aout     ", "Septembre", "Octobre  ", "Novembre ", "Decembre "};
+
 
 
     ifstream fichier(".\\donnees\\volumes_d_eau_distribues.txt");
@@ -35,6 +25,7 @@ int main() {
         cout << "ERREUR";
 
     for(int m = 1; m <= 12; ++m) {
+        int nombre = 0,somme = 0;
         for(int i = 0; i < brut.size(); ++i) {
             if(brut[i][0] == m){
                 somme += brut[i][1];
@@ -46,7 +37,7 @@ int main() {
     }
 
     for(int i = 0; i < mois.size(); ++i) {
-        cout << "Le volume d'eau distribue en ce " << mois[i][0] << "eme mois est de\t" << mois[i][1] << "litres." << endl;
+        cout << "Le volume d'eau distribue en ce mois de " << noms.at(mois[i][0]-1) << "\test de\t" << mois[i][1] << " litres." << endl;
     }
 
 }
