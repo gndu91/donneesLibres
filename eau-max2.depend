@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1448561879 source:c:\users\ghoul nadir\documents\github\donneeslibres\tableau-donnees.cpp
+	<fstream>
+	"tableau-donnees.h"
+
+1448561473 c:\users\ghoul nadir\documents\github\donneeslibres\tableau-donnees.h
+	<vector>
+	<string>
+

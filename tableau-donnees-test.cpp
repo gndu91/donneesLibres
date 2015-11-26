@@ -18,13 +18,11 @@ void totalTest() {
 }
 
 void maxTest() {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction maxTest non implanté");
+    ASSERT( max(c) == 5 );
 }
 
 void maxPositionTest() {
-    // Remplacer la ligne suivante par le code adéquat
-    throw runtime_error("Fonction maxPositionTest non implanté");
+    ASSERT( maxPosition({1,2,3,4,5}) == 4 );
 }
 
 void litTableauIntTest() {

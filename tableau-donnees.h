@@ -16,8 +16,7 @@ int total(vector<int> t);
 
 /** Max d'un tableau
  * @param un tableau d'entiers
- * @result le plus grand de ces entiers;
-    comportement non défini si le tableau est vide
+ * @result le plus grand de ces entiers (0 par defaut)
  **/
 int max(vector<int> t);
 
