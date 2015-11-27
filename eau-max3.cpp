@@ -5,9 +5,21 @@
 #define println(X)  print(X);\
                     print('\n');
 
-#define FOR(i,corresp) for(int i = 0; i < corresp.size(); ++i)
+#define FOR(i,corresp,C,instructions) for(int i = 0; ((i < corresp.size())); ++i) {C = corresp.at(i);instructions;}
 using namespace std;
 
+
+template<typename T> int
+toInt(T t) {
+    ofstream out("tmp");
+    out << t;
+    out.close();
+    ifstream in("tmp");
+    int i = 0;
+    in >> i;
+    return i;
+    in.close();
+}
 
 template<typename T>
 void print(T t) {
@@ -38,11 +50,9 @@ couper(string entree, string) {
     return sortie;
 }
 
-vector<int>
-couper(string entree, int, vector<string> corresp) {
+string extraire(string entree, int rang = -1) {
     vector<string> sortie;
-    vector<int> r;
-    println(entree);
+    vector<string> r2;
 
     sortie.push_back("");
     for(auto C : entree) {
@@ -51,28 +61,9 @@ couper(string entree, int, vector<string> corresp) {
         else
             sortie.back().push_back(C);
     }
-    ofstream out("temp");
-    if(out) {
-        for(auto Case : sortie)
-        FOR(i,corresp) {
-            if(Case == corresp.at(i))
-                out << i ;
-            else
-                out << Case;
-            out << endl;
-        }
-    }
-        for(auto C : sortie)
-    out.close();
-    while(r.size() < sortie.size())
-        r.push_back(1);
-    ifstream in("temp");
-    if(in)
-        for(auto& C : r)
-            in >> C;
-    in.close();
-    println(r);
-    return r;
+    if(rang < 0)
+        return sortie.back();
+    println(sortie);
 }
 
 template<typename T> T
@@ -86,7 +77,7 @@ int main() {
     vector<vector<string>>  noms =  {{"janv-11", "févr-11", "mars-11", "avr-11", "mai-11", "juin-11", "juil-11", "août-11", "sept-11", "oct-11", "nov-11", "déc-11"},
                                     {"Janvier  ", "Fevrier  ", "Mars     ", "Avril    ", "Mai      ", "Juin     ", "Juillet  ", "Aout     ", "Septembre", "Octobre  ", "Novembre ", "Decembre "}};
     vector<string> enTete;
-    vector<vector<int>> lignes;
+    vector<int> lignes;
     string temp;
     ///Mois;Volumes_d'eau_distribués_(m3)
     ifstream fichier(".\\donnees\\volumes_d_eau_distribues.csv");
@@ -96,19 +87,20 @@ int main() {
         while(fichier) {
             fichier >> temp;
             if(fichier)
-                lignes.push_back(couper(string(temp),0,noms.front()));
+                lignes.push_back(toInt(extraire(string(temp))));
         }
     }
     else {
         cout << "ERREUR de lecture du fichier";
         return(-1);
     }
-    println(lignes);
+    vector<string> corresp = noms.front();
     int maxi = 0;
     for(auto l : lignes) {
-        if(l.back()>maxi) {
-            maxi = l.back();
-            cout << l.back();
+        string& C = corresp.front();
+        FOR(i,corresp,C,cout << C << endl;);
+        if(l>maxi) {
+            maxi = l;
         }
     }
     if(not(brut.size()))
