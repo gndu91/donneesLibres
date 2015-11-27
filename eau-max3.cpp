@@ -1,3 +1,12 @@
+#define LINUX
+
+#ifdef LINUX
+#define FICHIER "./donnees/volumes_d_eau_distribues.csv"
+#endif // LINUX
+#ifdef WINDOWS
+#define FICHIER ".\\donnees\\volumes_d_eau_distribues.csv"
+#endif // WINDOWS
+
 #include <fstream>
 #include <vector>
 #include <iostream>
@@ -5,9 +14,40 @@
 #define println(X)  print(X);\
                     print('\n');
 
-#define FOR(i,corresp,C,instructions) for(int i = 0; ((i < corresp.size())); ++i) {C = corresp.at(i);instructions;}
-using namespace std;
+#define FOR(i,vect,at_,instructions) {\
+                                        int i = 0;\
+                                        while(i < vect.size()) {\
+                                            auto& at_ = vect[i];\
+                                            {\
+                                                instructions;\
+                                            };\
+                                            ++i;\
+                                        }\
+                                    }
+#define IF(bool,instr0,instr1) if(bool){instr0;}else{instr1;}
 
+#define SWITCH(var,block) {auto ___VAR___ = var; block;}
+#define CASE(   ___VALUE___,\
+                ___INSTRUCION_IF___,\
+                ___INSTRUCION_ELSE___) {\
+                                        IF( ___VAR___==___VALUE___,\
+                                            ___INSTRUCION_IF___,\
+                                            ___INSTRUCION_ELSE___\
+                                           )\
+                                       }
+
+#define SWITCH_(var,block) {auto ___VAR___ = var;\
+                            int ___BLOCKS_VER___ = 0;\
+                            block;\
+                          }
+#define CASE_(   ___VALUE___,\
+                ___INSTRUCION_IF___) {\
+                                        IF( ___VAR___==___VALUE___&&!___BLOCKS_VER___,\
+                                            ___INSTRUCION_IF___; \
+                                            ___BLOCKS_VER___ = 1,\
+                                          )\
+                                       }
+using namespace std;
 
 template<typename T> int
 toInt(T t) {
@@ -61,8 +101,9 @@ string extraire(string entree, int rang = -1) {
         else
             sortie.back().push_back(C);
     }
-    if(rang < 0)
+    if(rang < 0 or rang > sortie.size())
         return sortie.back();
+    return sortie.at(rang);
     println(sortie);
 }
 
@@ -72,15 +113,24 @@ correspondance(vector<vector<T>> t, T t_, int a=0, int b = __SIZEOF_INT__) {
 }
 
 int main() {
+    int i = 1;
+    SWITCH_(i,
+        CASE_(i,cout<<1)
+        CASE_(___VAR___,cout<<2)
+    )
+}
+
+int mainL() {
     vector<vector<int> >    brut;
     vector<vector<int> >    mois;
     vector<vector<string>>  noms =  {{"janv-11", "févr-11", "mars-11", "avr-11", "mai-11", "juin-11", "juil-11", "août-11", "sept-11", "oct-11", "nov-11", "déc-11"},
                                     {"Janvier  ", "Fevrier  ", "Mars     ", "Avril    ", "Mai      ", "Juin     ", "Juillet  ", "Aout     ", "Septembre", "Octobre  ", "Novembre ", "Decembre "}};
     vector<string> enTete;
     vector<int> lignes;
+    vector<string> lignes_;
     string temp;
     ///Mois;Volumes_d'eau_distribués_(m3)
-    ifstream fichier(".\\donnees\\volumes_d_eau_distribues.csv");
+    ifstream fichier(FICHIER);
     if(fichier){
         fichier >> temp;
         enTete = couper(string(temp),string(""));
@@ -88,6 +138,7 @@ int main() {
             fichier >> temp;
             if(fichier)
                 lignes.push_back(toInt(extraire(string(temp))));
+                lignes_.push_back(extraire(string(temp)));
         }
     }
     else {
@@ -95,14 +146,14 @@ int main() {
         return(-1);
     }
     vector<string> corresp = noms.front();
+    string moi;
     int maxi = 0;
-    for(auto l : lignes) {
-        string& C = corresp.front();
-        FOR(i,corresp,C,cout << C << endl;);
-        if(l>maxi) {
+    FOR(i,lignes,l, {
+        IF(l>maxi, {
+            FOR(i, corresp,C,)
             maxi = l;
-        }
-    }
+        },);
+    });
     if(not(brut.size()))
         return -1;
 
