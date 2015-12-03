@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1449128673 source:c:\users\ghoul nadir\documents\github\donneeslibres\communes\cvs.cpp
+
+1449132364 source:c:\users\ghoul nadir\documents\github\donneeslibres\communes\main.cpp
+	<cstdlib>
+	<stdlib.h>
+	<vector>
+	"core.h"
+	<SDL/SDL.h>
+
+1449129873 c:\users\ghoul nadir\documents\github\donneeslibres\communes\core.h
+	<iostream>
+	<cstdlib>
+	<vector>
+	<fstream>
+	<windows.h>
+
+1449129498 source:c:\users\ghoul nadir\documents\github\donneeslibres\communes\core.cpp
+	"core.h"
+
