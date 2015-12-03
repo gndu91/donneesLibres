@@ -7,12 +7,17 @@
 
 using namespace std;
 
-vector<vector<string>> extraireFichier(string chemin);
+vector<vector<string>> extraireFichier(string chemin,char separateur);
 vector<string> extraireColonne(vector<vector<string>> entree, int rang);
 
 template<typename T> T
 convertir(string entree, T& sortie) {
-    istringstream(entree) >> sortie;
+    ofstream out("tmp");
+        out << entree;
+        out.close();
+    ifstream in("tmp");
+        in >> sortie;
+        in.close();
     return sortie;
 }
 

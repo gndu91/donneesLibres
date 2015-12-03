@@ -22,7 +22,7 @@ vector<vector<string>> lit_donnees(string fichier, int nbcolonnes) {
 }
 
 int main() {
-    vector<vector<string>> donnees = lit_donnees("arbresremarquablesparis2011.csv", 13);
+    vector<vector<string>> donnees = lit_donnees("donnees/arbresremarquablesparis2011.csv", 13);
     for ( auto ligne: donnees ) {
         cout << ligne[1] << ' ' << ligne[5] << endl;
     }

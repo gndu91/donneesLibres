@@ -33,7 +33,7 @@ void print(T t, int layer) {
 template<typename T>
 void print(vector<T> t, int layer) {
     print('{', layer);
-    int i = 0;
+    unsigned int i = 0;
     if(t.size()) {
         if(layer == profondeur(t))
             print('\n',layer);

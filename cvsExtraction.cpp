@@ -2,7 +2,7 @@
 
 #define AVOID(cc) while(cc.size())cc.pop_back();
 
-vector<vector<string>> extraireFichier(string chemin) {
+vector<vector<string>> extraireFichier(string chemin,char separateur) {
     vector<vector<string>>  sortie;
     string                  ligneComplete;
     vector<string>          ligne;
@@ -14,7 +14,7 @@ vector<vector<string>> extraireFichier(string chemin) {
             fichier >> ligneComplete;
             ligne.push_back({});
             for(char c : ligneComplete) {
-                if(c == ';')
+                if(c == separateur)
                     ligne.push_back({});
                 else
                     ligne.back().push_back(c);
